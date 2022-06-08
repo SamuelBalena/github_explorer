@@ -1,8 +1,11 @@
 const path = require('path') // Importando o path para mexer no diretório
 const HtmlWebpackPlugin =  require('html-webpack-plugin')
 
+const isDevelopment = process.env.NODE_ENV !== 'production'
+
 module.exports = {
-    mode: 'development',
+    mode: isDevelopment ? 'development' : 'production',
+    devtool: isDevelopment ? 'eval-source-map' : 'source-map',
     entry: path.resolve(__dirname,'src', 'index.jsx'), // configurando os arquivos de entrada
     output: {
         path: path.resolve(__dirname,'dist'), // configurando a pasta que vai sair
@@ -21,5 +24,12 @@ module.exports = {
                 use: 'babel-loader',
             }
         ],
+        rules:[
+            {
+                test: /\.css$/,
+                exclude: /node_modules/,
+                use: 'babel-loader',
+            }
+        ]
     },
 }
