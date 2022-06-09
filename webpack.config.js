@@ -1,5 +1,6 @@
 const path = require('path') // Importando o path para mexer no diretório
 const HtmlWebpackPlugin =  require('html-webpack-plugin')
+const { dirname } = require('path')
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -11,6 +12,12 @@ module.exports = {
         path: path.resolve(__dirname,'dist'), // configurando a pasta que vai sair
         filename: 'bundle.js'
     },
+    resolve:{
+        extensions:['.js','.jsx'],
+    },
+    /*devServer: {
+        contentBase: path.resolve(__dirname,'dist')
+    },*/
     plugins: [
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html')
@@ -21,14 +28,12 @@ module.exports = {
             {
                 test: /\.jsx$/,
                 exclude: /node_modules/,
-                use: 'babel-loader',
-            }
-        ],
-        rules:[
+                use: 'babel-loader'
+            },
             {
-                test: /\.css$/,
+                test: /\.scss$/,
                 exclude: /node_modules/,
-                use: 'babel-loader',
+                use: ['style-loader','css-loader','sass-loader'],
             }
         ]
     },
