@@ -1,6 +1,8 @@
 import { RepositoryItem } from "./RepositiryItem";
 import api from "../api/fakeApi.json"
 
+import "../styles/repositories.scss";
+
 //const repository = ["unform","Forms in React","https://github/unform/unform"] Acabei fazendo uma fake api para esses dados
 
 export function RepositoryList(){
