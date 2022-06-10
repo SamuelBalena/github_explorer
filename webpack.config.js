@@ -1,5 +1,7 @@
 const path = require('path') // Importando o path para mexer no diretório
 const HtmlWebpackPlugin =  require('html-webpack-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+
 const { dirname } = require('path')
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -15,14 +17,16 @@ module.exports = {
     resolve:{
         extensions:['.js','.jsx'],
     },
-    /*devServer: {
-        contentBase: path.resolve(__dirname,'dist')
-    },*/
+    devServer: {
+        static: path.resolve(__dirname,'dist'),
+        hot: true
+    },
     plugins: [
+        isDevelopment && new ReactRefreshWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: path.resolve(__dirname, 'public', 'index.html')
         })
-    ],
+    ].filter(Boolean), // Para filtrar o valor false que ReactRefresh vai retornar, assim não crashando o webpack
     module: {
         rules:[
             {
