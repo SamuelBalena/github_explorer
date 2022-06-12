@@ -6,8 +6,14 @@ import "../styles/repositories.scss";
 
 // https://api.github.com/users/SamuelBalena/repos
 
+interface Respository {
+    name: string;
+    description: string;
+    html_url: string;
+}
+
 export function RepositoryList(){
-    const [ repositories, setRepositories ] = useState([])
+    const [ repositories, setRepositories ] = useState<Respository[]>([])
 
     useEffect(()=>{
         axios.get("https://api.github.com/users/SamuelBalena/repos")
