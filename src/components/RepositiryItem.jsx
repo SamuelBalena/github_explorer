@@ -1,6 +1,6 @@
 export function RepositoryItem (props) {
     return (
-        <li>
+        <li className="card">
             <strong>{props.repository.name}</strong>
             <p>{props.repository.description}</p>
 
